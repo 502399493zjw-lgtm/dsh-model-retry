@@ -10,9 +10,9 @@ DeepSeek Harness Web 插件：在 **设置 → 通用** 中统一配置 active �
 
 ## 演示
 
-![把模型请求重试次数设为 3，并在三次 DSH 重试后恢复](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
+![在 stock DSH rc.8 中把模型请求重试次数从 5 改为 7，重开设置确认持久化，并在可重试失败后自动恢复](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
 
-当前录屏记录的是 rc.5 产品流程。rc.8 仍在“设置 → 通用”提供同一个入口，同时会明确显示将修改多少个 active normal 提供方、多少个 always 提供方保持无限重试；正式发布前应补录 rc.8 演示。
+演示来自 stock DSH `0.1.0-rc.8` 和本分支 `fb39c3b` 打出的插件 tarball，全部安装在隔离的 `DSH_HOME`。画面先把两个 active normal 提供方的重试次数从 `5` 改为 `7`，重开设置确认持久化，再使用 DSH 自带的本地 LLM mock 让前三次请求返回可重试错误、第四次成功。重试执行和状态提示来自 DSH；插件负责统一设置重试预算。
 
 ## 安装
 

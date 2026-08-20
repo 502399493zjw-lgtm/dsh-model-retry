@@ -10,9 +10,9 @@ DeepSeek Harness Web plugin for configuring active providers' model-request retr
 
 ## Demo
 
-![Set the retry budget to 3 and recover after three DSH retries](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
+![Change the retry budget from 5 to 7 on stock DSH rc.8, reopen Settings to prove persistence, and recover from retryable failures](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
 
-The current recording documents the rc.5 product flow. The rc.8 UI keeps the same General-settings entry, but now reports how many active normal providers will change and how many always-mode providers remain unlimited. A refreshed rc.8 recording should be produced before release.
+The demo uses stock DSH `0.1.0-rc.8` and a plugin tarball packed from this branch at `fb39c3b`, all under an isolated `DSH_HOME`. It changes two active normal providers from `5` retries to `7`, reopens Settings to prove persistence, then uses DSH's local LLM mock to return retryable errors for the first three requests and succeed on the fourth. DSH executes and reports the retries; the plugin owns the shared retry-budget setting.
 
 ## Install
 
