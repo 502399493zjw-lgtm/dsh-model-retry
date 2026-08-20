@@ -1,2 +1,2 @@
-/** Browser-only settings surface; runtime retry behavior belongs to dsh-llm-retry. */
+/** Browser-only settings surface; DSH rc.8 providers own retry policy and execution. */
 export function apply(): void {}

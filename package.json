@@ -1,7 +1,7 @@
 {
   "name": "@zhongjingwei/dsh-model-retry",
-  "version": "0.1.0-rc.5",
-  "description": "Optional Web settings row for the global model-request retry budget",
+  "version": "0.1.0-rc.8",
+  "description": "DSH rc.8 Web settings row for active providers' model-request retry budget",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/502399493zjw-lgtm/dsh-model-retry.git"
@@ -50,25 +50,34 @@
         "@deepseek-ai/dsh-client-locale",
         "@deepseek-ai/dsh-client-runtime",
         "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-slots",
         "@deepseek-ai/dsh-api-remotes"
       ],
       "platform": "web"
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-api-remotes": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-client-connection": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-client-locale": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-client-ui-settings": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.5",
-    "@deepseek-ai/dsh-llm-retry": "0.1.0-rc.5",
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-api-remotes": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-connection": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-locale": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-settings": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-llm": "0.1.0-rc.8",
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-api-remotes": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-connection": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-locale": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-settings": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.8",
+    "@deepseek-ai/dsh-llm": "0.1.0-rc.8",
     "@tsdown/css": "0.22.14",
-    "@types/react": "^18.2.0",
+    "@types/react": "~18.3.1",
     "react": "^18.2.0",
     "typescript": "^5.8.3",
     "tsdown": "^0.22.2"
