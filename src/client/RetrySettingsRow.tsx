@@ -79,16 +79,15 @@ export function RetrySettingsRow({ useRetrySettings, controller, t }: RetrySetti
           aria-invalid={!valid && raw.length > 0}
           disabled={disabled}
           onChange={(event) => { setRaw(event.target.value) }}
+          onBlur={commit}
           onKeyDown={(event) => {
-            if (event.key === 'Enter') commit()
+            if (event.key === 'Enter') event.currentTarget.blur()
+            if (event.key === 'Escape') {
+              setRaw(current === undefined ? '' : String(current))
+            }
           }}
         />
-        <button
-          className={css.button}
-          type="button"
-          disabled={disabled || !valid || unchanged}
-          onClick={commit}
-        >{t('apply')}</button>
+        <span className={css.unit}>{t('unit')}</span>
       </div>
     </div>
   )

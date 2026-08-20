@@ -10,9 +10,9 @@ DeepSeek Harness Web plugin for configuring active providers' model-request retr
 
 ## Demo
 
-![Change the retry budget from 5 to 7 on stock DSH rc.8, reopen Settings to prove persistence, and recover from retryable failures](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
+![Set the retry budget to 5, show retries 1/5 through 5/5, and recover when the sixth model request succeeds](https://raw.githubusercontent.com/502399493zjw-lgtm/dsh-model-retry/main/docs/assets/dsh-model-retry-demo.gif)
 
-The demo uses stock DSH `0.1.0-rc.8` and a plugin tarball packed from this branch at `fb39c3b`, all under an isolated `DSH_HOME`. It changes two active normal providers from `5` retries to `7`, reopens Settings to prove persistence, then uses DSH's local LLM mock to return retryable errors for the first three requests and succeed on the fourth. DSH executes and reports the retries; the plugin owns the shared retry-budget setting.
+The demo uses stock DSH `0.1.0-rc.8` and a plugin tarball packed from this source, all under an isolated `DSH_HOME`. It changes the retry budget from `2` to `5`, then uses DSH's deterministic local LLM mock to return retryable server errors on attempts 1–5 and succeed on attempt 6. Session-title generation is disabled so those six mock requests belong only to the demonstrated model request. DSH executes and reports the retries; the plugin owns the shared retry-budget setting.
 
 ## Install
 
