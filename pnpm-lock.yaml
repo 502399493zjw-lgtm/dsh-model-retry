@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@deepseek-ai/cordis':
-        specifier: ^4.0.1
+        specifier: 4.0.1
         version: 4.0.1
       '@deepseek-ai/dsh-api-remotes':
         specifier: 0.1.0-rc.8

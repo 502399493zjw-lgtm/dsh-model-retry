@@ -40,5 +40,20 @@ for (const file of await walk(join(root, 'lib'))) {
 if (packageJson.repository?.url !== 'git+https://github.com/502399493zjw-lgtm/dsh-model-retry.git') {
   throw new Error('unexpected repository metadata')
 }
+if (packageJson.exports?.['./cordis.patch.yml'] !== './cordis.patch.yml') {
+  throw new Error('cordis.patch.yml must be exported')
+}
+if (!packageJson.files?.includes('LICENSE')) {
+  throw new Error('LICENSE must be included in the published files')
+}
+if (packageJson.peerDependencies?.['@deepseek-ai/cordis'] !== '4.0.1') {
+  throw new Error('Cordis peer dependency must match the verified baseline')
+}
+if (packageJson.engines?.node !== '^22.19.0 || >=24.0.0') {
+  throw new Error('Node engine must match the verified baseline')
+}
+if (packageJson.packageManager !== 'pnpm@11.7.0') {
+  throw new Error('pnpm version must match the verified baseline')
+}
 
 console.log('package files and public metadata verified')

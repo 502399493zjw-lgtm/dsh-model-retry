@@ -16,7 +16,7 @@ The demo uses stock DSH `0.1.0-rc.8` and a plugin tarball packed from this sourc
 
 ## Install
 
-For stock rc.8 after this package version is published:
+For stock rc.8:
 
 ```bash
 dsh plugin --profile web add @zhongjingwei/dsh-model-retry@0.1.0-rc.8

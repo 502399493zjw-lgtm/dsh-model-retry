@@ -16,7 +16,7 @@ DeepSeek Harness Web 插件：在 **设置 → 通用** 中统一配置 active �
 
 ## 安装
 
-此版本发布后，在 stock rc.8 Web Profile 中安装：
+在 stock rc.8 Web Profile 中安装：
 
 ```bash
 dsh plugin --profile web add @zhongjingwei/dsh-model-retry@0.1.0-rc.8
