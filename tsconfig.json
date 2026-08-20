@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "@deepseek-ai/cordis": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-api-remotes/client": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-client-connection": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-client-locale/client": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-client-runtime/client": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-client-ui-settings/client": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-client-ui-slots": ["src/external-types.d.ts"],
+      "@deepseek-ai/dsh-llm-retry/types": ["src/external-types.d.ts"]
+    }
+  },
+  "include": ["src"]
+}
