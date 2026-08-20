@@ -19,7 +19,7 @@ The demo uses stock DSH `0.1.0-rc.8` and a plugin tarball packed from this sourc
 For stock rc.8:
 
 ```bash
-dsh plugin --profile web add @zhongjingwei/dsh-model-retry@0.1.0-rc.8
+dsh plugin --profile web add @zhongjingwei/dsh-model-retry@0.1.0-rc.9
 ```
 
 Restart Web after installation. Remove the plugin with:

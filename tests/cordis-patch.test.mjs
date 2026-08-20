@@ -20,7 +20,7 @@ test('the standalone source targets stock DSH rc.8 without machine-local build i
   })
   assert.equal(packageJson.homepage, 'https://github.com/502399493zjw-lgtm/dsh-model-retry#readme')
   assert.equal(packageJson.bugs?.url, 'https://github.com/502399493zjw-lgtm/dsh-model-retry/issues')
-  assert.equal(packageJson.version, '0.1.0-rc.8')
+  assert.equal(packageJson.version, '0.1.0-rc.9')
   assert.equal(packageJson.peerDependencies['@deepseek-ai/cordis'], '4.0.1')
   assert.equal(packageJson.peerDependencies['@deepseek-ai/dsh-api-remotes'], '0.1.0-rc.8')
   assert.equal(packageJson.peerDependencies['@deepseek-ai/dsh-client-runtime'], '0.1.0-rc.8')
