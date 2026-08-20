@@ -1,6 +1,6 @@
 {
   "name": "@zhongjingwei/dsh-model-retry",
-  "version": "0.1.0-rc.8",
+  "version": "0.1.0-rc.9",
   "description": "DSH rc.8 Web settings row for active providers' model-request retry budget",
   "repository": {
     "type": "git",
