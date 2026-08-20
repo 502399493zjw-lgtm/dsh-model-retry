@@ -1,14 +1,13 @@
-/** Global finite retry budget rendered in the General settings section. */
+/** One finite retry budget projected across active rc.8 normal providers. */
 
 import { useEffect, useState } from 'react'
-import type { SettingsScope } from '@deepseek-ai/dsh-client-runtime/client'
 import type { InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
-import type { RetrySettings } from './settings-contract.ts'
+import type { RetryPolicyController, RetryPolicySnapshot } from './retry-policy-controller.ts'
 import css from './RetrySettingsRow.module.css'
 
 export interface RetrySettingsRowInjected {
-  hooks: { retrySettings: SettingsScope<RetrySettings> }
-  setMaxRetries: (value: number) => Promise<void>
+  controller: RetryPolicyController
+  hooks: { retrySettings: { getSnapshot(): RetryPolicySnapshot; subscribe(fn: () => void): () => void } }
 }
 
 export type RetrySettingsRowProps = PropsRuntime<'settings.general.item'>
@@ -21,34 +20,41 @@ export function parseMaxRetries(raw: string): number | undefined {
   return Number.isSafeInteger(value) ? value : undefined
 }
 
-export function RetrySettingsRow({ useRetrySettings, setMaxRetries, t }: RetrySettingsRowProps) {
+export function RetrySettingsRow({ useRetrySettings, controller, t }: RetrySettingsRowProps) {
   const snapshot = useRetrySettings(state => state)
-  const current = snapshot.value?.maxRetries
+  const current = snapshot.maxRetries
   const [raw, setRaw] = useState(current === undefined ? '' : String(current))
-  const [saving, setSaving] = useState(false)
   const parsed = parseMaxRetries(raw)
   const valid = parsed !== undefined
-  const disabled = snapshot.status !== 'ready' || !snapshot.writable || saving
+  const disabled = snapshot.status !== 'ready' || !snapshot.writable || snapshot.saving
+  const unchanged = !snapshot.mixed && parsed === current
 
   useEffect(() => {
     setRaw(current === undefined ? '' : String(current))
   }, [current])
 
   const commit = (): void => {
-    if (disabled || parsed === undefined || parsed === current) return
-    setSaving(true)
-    void setMaxRetries(parsed).finally(() => { setSaving(false) })
+    if (disabled || parsed === undefined || unchanged) return
+    void controller.setMaxRetries(parsed)
   }
 
-  const status = saving
+  const status = snapshot.saving
     ? t('saving')
-    : snapshot.status === 'loading'
+    : snapshot.status === 'idle' || snapshot.status === 'loading'
       ? t('loading')
       : snapshot.status === 'unavailable'
         ? t('unavailable')
         : !snapshot.writable
           ? t('readOnly')
-          : undefined
+          : snapshot.providerCount === 0
+            ? t('noProviders')
+            : snapshot.mixed
+              ? t('mixed', { count: snapshot.eligibleCount })
+              : t('applies', { count: snapshot.eligibleCount })
+
+  const unlimited = snapshot.unlimitedCount > 0
+    ? t('unlimited', { count: snapshot.unlimitedCount })
+    : null
 
   return (
     <div className={css.row}>
@@ -57,24 +63,33 @@ export function RetrySettingsRow({ useRetrySettings, setMaxRetries, t }: RetrySe
         <p className={css.description}>{t('description')}</p>
         {!valid && raw.length > 0
           ? <p className={css.error} role="alert">{t('invalid')}</p>
-          : status === undefined ? null : <p className={css.status}>{status}</p>}
+          : <p className={css.status}>{status}{unlimited === null ? null : <> {unlimited}</>}</p>}
+        {snapshot.error === null ? null : <p className={css.error} role="alert">{snapshot.error}</p>}
       </div>
-      <input
-        className={css.input}
-        type="number"
-        min="0"
-        max={Number.MAX_SAFE_INTEGER}
-        step="1"
-        value={raw}
-        aria-label={t('title')}
-        aria-invalid={!valid && raw.length > 0}
-        disabled={disabled}
-        onChange={(event) => { setRaw(event.target.value) }}
-        onBlur={commit}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') event.currentTarget.blur()
-        }}
-      />
+      <div className={css.control}>
+        <input
+          className={css.input}
+          type="number"
+          min="0"
+          max={Number.MAX_SAFE_INTEGER}
+          step="1"
+          value={raw}
+          placeholder={snapshot.mixed ? '—' : undefined}
+          aria-label={t('title')}
+          aria-invalid={!valid && raw.length > 0}
+          disabled={disabled}
+          onChange={(event) => { setRaw(event.target.value) }}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') commit()
+          }}
+        />
+        <button
+          className={css.button}
+          type="button"
+          disabled={disabled || !valid || unchanged}
+          onClick={commit}
+        >{t('apply')}</button>
+      </div>
     </div>
   )
 }
